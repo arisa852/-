@@ -6,7 +6,7 @@
 <title>代辦事項</title>
 <style>
     #taskList {
-       
+       list-style: none;
         padding: 10px;
     }
     #taskList li {
@@ -16,143 +16,36 @@
     .container{
       display: flex;
       padding-top: 10px;
+    
      }
      
-     .container-list{
+     .list{
         display: flex;
-
-
-     }
+ }
 
 </style>
 </head>
 <body>
 
-<h1>代辦事項</h1>
+<h1>待辦事項</h1>
 
 <input type="text" id="taskInput">
-<button onclick="addTask">新增</button>
+<button id="addTask">新增</button>
+<input type="text" id="searchBox">
+<button id="serch-Btn">搜尋</button>
+
 
 <div class="container">
-    <button onclick="filterTasks('all')">全部</button>
-    <button onclick="filterTasks('incomplete')">未完成</button>
-    <button onclick="filterTasks('completed')">已完成</button>
+    <button id="all-Btn">全部</button>
+    <button id="incomplete-Btn">未完成</button>
+    <button id="completed-Btn">已完成</button>
 </div>
 
 <div class="container-list">
-<ul id="taskList">
-<li>吃飯</li>
-<button type="button" id="Delete">刪除</button>
-<button type="button" id="Edit">編輯</button>
-<li>逛街</li>
-<button type="button" id="Delete">刪除</button>
-<button type="button" id="Edit">編輯</button>
-<li>買菜</li>
-<button type="button" id="Delete">刪除</button>
-<button type="button" id="Edit">編輯</button>
-</ul>
+    <ul id="taskList"></ul>
+  </div>
 
-</div>
-
-<script>
-
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
- const taskList = document.getElementById('taskList');
-
- task.forEack((task.index)) => {
-
-    const li = document.createElementNS("li");
-    li.textContent = task.textContent;
-    if (task.complete){
-
-        li.classList.add('completed')
-    }
-   
-    li.addEventListener('click,( ) => toggleTaskStatus(index));
-            taskList.appendChild(li);')
-    
-        });
- }
-
-  function addTask ( ){
-
-    const taskInput = document.getElementById('taskInput');
-    const taskContent = taskInput.value.trim( );
-    if (taskContent !== '') {
-            const newTask = { content: taskContent, completed: false };
-            tasks.push(newTask);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            displayTasks();
-            taskInput.value = '';
-        } else {
-            alert('請輸入有效的事項內容！');
-        }
-
-        function toggleTaskStatus(index) {
-        tasks[index].completed = !tasks[index].completed;
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        displayTasks();
-    } 
- }
-
- function filterTasks(filterType) {
-        const filteredTasks = tasks.filter(task => {
-            if (filterType === 'all') {
-                return true;
-            } else if (filterType === 'incomplete') {
-                return !task.completed;
-            } else if (filterType === 'completed') {
-                return task.completed;
-            }
-        });
-        displayFilteredTasks(filteredTasks);
-    }
-
-    
-     function displayFilteredTasks(filteredTasks) {
-        taskList.innerHTML = ''; // 清空列表
-        filteredTasks.forEach((task, index) => {
-            const li = document.createElement('li');
-            li.textContent = task.content;
-            if (task.completed) {
-                li.classList.add('completed');
-            }
-            li.addEventListener('click', () => toggleTaskStatus(index));
-            taskList.appendChild(li);
-        });
-    }
-
-  
-    function editTask(index) {
-        const taskItem = taskList.children[index];
-        const taskContent = taskItem.textContent;
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = taskContent;
-        input.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                tasks[index].content = input.value.trim();
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-                displayTasks();
-            }
-        });
-        taskItem.innerHTML = ''; 
-        taskItem.appendChild(input);
-        input.focus();
-    }
-
-   
-    displayTasks();
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' && document.activeElement === document.getElementById('taskInput')) {
-            addTask();
-        }
-    });
-
-
-
-</script>
+<script src="script/index.js"></script>
 
 </body>
 </html>
